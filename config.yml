@@ -1,4 +1,6 @@
 version: 1
+genesis:
+  chain_id: testnet-ghostcloud-001
 accounts:
 - name: alice
   coins:
@@ -8,14 +10,21 @@ accounts:
   coins:
   - 10000token
   - 100000000stake
+- name: faucet
+  coins:
+    - 10000token
 client:
   openapi:
     path: docs/static/openapi.yml
+# The following faucet parameters are only used when running `ignite chain serve` locally.
+# Testnets/mainnets should use a separate faucet service.
 faucet:
-  name: bob
+  name: faucet
   coins:
-  - 5token
-  - 100000stake
+    - 50token
+  coins_max:
+    - 100token
+  rate_limit_window: 3600s
 validators:
 - name: alice
   bonded: 100000000stake
